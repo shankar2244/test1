@@ -6,7 +6,7 @@ phases:
       java: corretto8
     commands:
       - pip install --upgrade awscli
-      - apt-get install zip unzip
+      - yum install unzip
   pre_build:
     commands:
       - mvn clean compile test
