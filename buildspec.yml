@@ -6,15 +6,15 @@ phases:
       java: corretto8
     commands:
       - pip install --upgrade awscli
-      - yum install unzip
+      - pip install unzip
   pre_build:
     commands:
       - mvn clean compile test
   build:
     commands:
       - mvn package
-      - mv target/sample-code-star-0.0.2-SNAPSHOT.war ROOT.war
-      - unzip ROOT.war
+      - mv target/sample-code-star-0.0.2-SNAPSHOT.war target/ROOT.zip
+      - unzip ROOT.zip
   post_build:
     commands:
       - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template-file template-export.yml
