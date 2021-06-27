@@ -6,15 +6,17 @@ phases:
       java: corretto8
     commands:
       - pip install --upgrade awscli
+      - pip install unzip
   pre_build:
     commands:
       - mvn clean compile test
   build:
     commands:
-      - mvn war:exploded
+      - mvn package
+      - mv target/sample-code-star-0.0.2-SNAPSHOT.war ROOT.war
+      - unzip ROOT.war
   post_build:
     commands:
-      - cp -r .ebextensions/ target/ROOT/
       - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template-file template-export.yml
 
       # Do not remove this statement. This command is required for AWS CodeStar projects.
