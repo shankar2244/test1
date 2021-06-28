@@ -9,7 +9,7 @@ phases:
       - yum install unzip
   pre_build:
     commands:
-      - mvn clean compile test
+      - mvn clean compile test 
   build:
     commands:
       - mvn package
